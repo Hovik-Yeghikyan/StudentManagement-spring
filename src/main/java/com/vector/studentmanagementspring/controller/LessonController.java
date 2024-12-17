@@ -13,14 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
-@RequestMapping("lessons")
+@RequestMapping("/lessons")
 public class LessonController {
 
     @Autowired
@@ -46,5 +42,6 @@ public class LessonController {
     public String addLesson(@ModelAttribute Lesson lesson) {
         lessonRepository.save(lesson);
         return "redirect:/lessons";
+
     }
 }

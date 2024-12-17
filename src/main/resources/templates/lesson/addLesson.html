@@ -12,10 +12,10 @@ Add Lesson
     duration: <input type="number" name="duration"/> <br>
     price: <input type="number" name="price"/> <br>
     start date: <input type="date" name="startDate"/><br>
-    Teacher: <select name="user.id">
+    Teacher:  <select name="user.id">
     <option th:each="user: ${users}"
             th:value="${user.id}"
-            th:text="${user.name + ' ' + user.surname}">
+            th:text="${user.name}">
     </option>
 </select><br>
     <input type="submit" value="Add">

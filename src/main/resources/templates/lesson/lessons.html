@@ -22,8 +22,9 @@ Lessons page
     <td th:text="${lesson.title}"></td>
     <td th:text="${lesson.duration}"></td>
     <td th:text="${lesson.price}"></td>
-    <td th:text="${lesson.getTeacher().getName()}"></td>
     <td th:text="${#dates.format(lesson.getStartDate(), 'dd-MM-yyyy')}"></td>
+    <td th:text="${lesson.getTeacher().name}"></td>
+
   </tr>
 </table>
 </body>
