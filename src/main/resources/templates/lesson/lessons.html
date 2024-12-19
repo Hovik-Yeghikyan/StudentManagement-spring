@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Books</title>
+  <title>Lessons</title>
 </head>
 <body>
 Lessons page
@@ -22,8 +22,14 @@ Lessons page
     <td th:text="${lesson.title}"></td>
     <td th:text="${lesson.duration}"></td>
     <td th:text="${lesson.price}"></td>
-    <td th:text="${#dates.format(lesson.getStartDate(), 'dd-MM-yyyy')}"></td>
-    <td th:text="${lesson.getTeacher().name}"></td>
+    <td th:text="${#dates.format(lesson.startDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+
+    <td>
+      <ul>
+        <li th:each="user: ${lesson.teacher}" th:if="${user.userType.name()=='TEACHER'}"
+            th:text="${user.name}"></li>
+      </ul>
+    </td>
 
   </tr>
 </table>

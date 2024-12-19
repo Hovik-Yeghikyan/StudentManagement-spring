@@ -5,7 +5,7 @@ import com.vector.studentmanagementspring.entity.User;
 import com.vector.studentmanagementspring.entity.UserType;
 import com.vector.studentmanagementspring.repository.LessonRepository;
 import com.vector.studentmanagementspring.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private LessonRepository lessonRepository;
+
+    private final UserRepository userRepository;
+
+    private final LessonRepository lessonRepository;
 
     @GetMapping("/students")
     public String studentsPage(ModelMap modelMap) {

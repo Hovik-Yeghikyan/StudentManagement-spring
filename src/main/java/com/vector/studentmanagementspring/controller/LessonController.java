@@ -5,26 +5,24 @@ import com.vector.studentmanagementspring.entity.User;
 import com.vector.studentmanagementspring.entity.UserType;
 import com.vector.studentmanagementspring.repository.LessonRepository;
 import com.vector.studentmanagementspring.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/lessons")
+@RequiredArgsConstructor
 public class LessonController {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private LessonRepository lessonRepository;
+    private final UserRepository userRepository;
 
-    @GetMapping
+    private final LessonRepository lessonRepository;
+
+    @GetMapping()
     public String lessonsPage(ModelMap modelMap) {
         List<Lesson> lessons = lessonRepository.findAll();
         modelMap.put("lessons", lessons);
@@ -39,7 +37,9 @@ public class LessonController {
     }
 
     @PostMapping("/add")
-    public String addLesson(@ModelAttribute Lesson lesson) {
+    public String addLesson(@ModelAttribute Lesson lesson, @RequestParam("user.id") int teacherId) {
+        Optional<User> byId = userRepository.findById(teacherId);
+        byId.ifPresent(lesson::setTeacher);
         lessonRepository.save(lesson);
         return "redirect:/lessons";
 
