@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @Data
 @AllArgsConstructor
@@ -22,6 +20,8 @@ public class User {
     private String name;
     private String surname;
     private String email;
+    private String password;
+    private String imageName;
 
     @ManyToOne
     private Lesson lesson;

@@ -6,7 +6,7 @@
 </head>
 <body>
 Add User
-<form action="/users/add" method="post">
+<form action="/users/add" method="post" enctype="multipart/form-data">
     Name: <input type="text" name="name"/><br>
     Surname: <input type="text" name="surname"/><br>
     Email: <input type="email" name="email"/><br>
@@ -21,6 +21,7 @@ Add User
                 th:text="${lesson.title}">
         </option>
     </select><br>
+    image: <input type="file" name="image">
     <input type="submit" value="Add">
 </form>
 </body>

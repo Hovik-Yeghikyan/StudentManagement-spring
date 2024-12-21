@@ -9,6 +9,7 @@ Students Page | <a href="/users/add">Add</a>
 <table border="1">
     <tr>
         <th>id</th>
+        <th>img</th>
         <th>name</th>
         <th>surname</th>
         <th>email</th>
@@ -19,6 +20,7 @@ Students Page | <a href="/users/add">Add</a>
 
     <tr th:each="user :${users}">
         <td th:text="${user.id}"></td>
+        <td><img th:if="${user.imageName != null}" th:src="@{/getImage(imageName=${user.imageName})}" width="100"></td>
         <td th:text="${user.name}"></td>
         <td th:text="${user.surname}"></td>
         <td th:text="${user.email}"></td>

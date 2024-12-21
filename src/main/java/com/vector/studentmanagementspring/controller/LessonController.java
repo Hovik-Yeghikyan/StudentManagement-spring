@@ -3,8 +3,8 @@ package com.vector.studentmanagementspring.controller;
 import com.vector.studentmanagementspring.entity.Lesson;
 import com.vector.studentmanagementspring.entity.User;
 import com.vector.studentmanagementspring.entity.UserType;
-import com.vector.studentmanagementspring.repository.LessonRepository;
-import com.vector.studentmanagementspring.repository.UserRepository;
+import com.vector.studentmanagementspring.service.LessonService;
+import com.vector.studentmanagementspring.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,29 +18,29 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LessonController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    private final LessonRepository lessonRepository;
+    private final LessonService lessonService;
 
     @GetMapping()
     public String lessonsPage(ModelMap modelMap) {
-        List<Lesson> lessons = lessonRepository.findAll();
+        List<Lesson> lessons = lessonService.findAll();
         modelMap.put("lessons", lessons);
         return "/lesson/lessons";
     }
 
     @GetMapping("/add")
     public String addLessonPage(ModelMap modelMap) {
-        List<User> users = userRepository.findByUserType(UserType.TEACHER);
+        List<User> users = userService.findByUserType(UserType.TEACHER);
         modelMap.put("users", users);
         return "/lesson/addLesson";
     }
 
     @PostMapping("/add")
     public String addLesson(@ModelAttribute Lesson lesson, @RequestParam("user.id") int teacherId) {
-        Optional<User> byId = userRepository.findById(teacherId);
+        Optional<User> byId = userService.findById(teacherId);
         byId.ifPresent(lesson::setTeacher);
-        lessonRepository.save(lesson);
+        lessonService.save(lesson);
         return "redirect:/lessons";
 
     }

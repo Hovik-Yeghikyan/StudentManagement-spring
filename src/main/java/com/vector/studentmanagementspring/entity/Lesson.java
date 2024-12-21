@@ -32,4 +32,3 @@ public class Lesson {
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private User teacher;
 }
-
